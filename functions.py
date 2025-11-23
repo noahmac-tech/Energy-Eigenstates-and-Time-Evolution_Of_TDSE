@@ -36,14 +36,17 @@ def eigenvalues_and_vectors(H):
     return energies, wavefuncs
 
 def Bound_energies(energies):
+    
     bound = np.where(energies < 0)[0]
     return energies[bound]
 
 def Bound_wavefuncs(wavefuncs, energies):
+    
     bound = np.where(energies < 0)[0]
     return wavefuncs[:, bound]
 
 def normalize_wavefunctions(wavefuncs):
+    
     for i, psi in enumerate(wavefuncs.T):
         psi_norm = psi / np.sqrt(np.sum(np.abs(psi)**2) * dx)
     return psi_norm    
