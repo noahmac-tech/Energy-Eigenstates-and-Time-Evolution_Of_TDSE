@@ -1,8 +1,7 @@
 import numpy as np
 from numpy.linalg import eigh
-import matplotlib.pyplot as plt
 from scipy import constants
-from grid.py import xi, dx
+from grid import xi, dx
 
 # Potential Well parameters
 
