@@ -3,12 +3,8 @@ from numpy.linalg import eigh
 from scipy import constants
 from grid import xi, dx
 
-# Potential Well parameters
-
 def q_parameter(p):
     return 1 / np.sqrt(p)
-
-# Potential Energy Function
 
 def potential_energy(x,q):
     return - 1 / (np.cosh(q * x) ** 2)
@@ -26,8 +22,6 @@ def localized_analytical_energies(p,n):
             energies_analytical.append(E_n)
     return energies_analytical
 
-    
-
 def stationary_hamiltonian(N,L,p):
 
     main_diag = 2 / dx**2 + potential_energy(xi,q_parameter(p))
@@ -41,3 +35,16 @@ def eigenvalues_and_vectors(H):
     energies, wavefuncs = eigh(H)
     return energies, wavefuncs
 
+def Bound_energies(energies):
+    bound = np.where(energies < 0)[0]
+    return energies[bound]
+
+def Bound_wavefuncs(wavefuncs, energies):
+    bound = np.where(energies < 0)[0]
+    return wavefuncs[:, bound]
+
+def normalize_wavefunctions(wavefuncs):
+    for i, psi in enumerate(wavefuncs.T):
+        psi_norm = psi / np.sqrt(np.sum(np.abs(psi)**2) * dx)
+    return psi_norm    
+    
