@@ -47,7 +47,7 @@ def Bound_wavefuncs(wavefuncs, energies):
 def Normalising_wavefunction(bound_wavefunctions, n, dx):
 
     u = bound_wavefunctions[:, n]
-    u_norm = u / np.sqrt(np.trapezoid(np.abs(u)**2, dx))
+    u_norm = u / np.sqrt(np.trapezoid(np.abs(u)**2, dx=dx))
     return u_norm
 
 def Selecting_energy(bound_energies, n):
