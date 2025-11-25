@@ -92,6 +92,7 @@ T0 = 2 * np.pi / np.abs(epsilon_0)
 
 c_0 = np.zeros(num_steps, dtype=complex)
 time_array = np.zeros(num_steps)
+psi = u_0_norm.copy()
 
 for n in range(num_steps):
     
@@ -99,3 +100,13 @@ for n in range(num_steps):
     time_array[n] = n * dt
     A_inv, B = Crank_Nicholson_Matrices(N=1000, dt=dt, H=H)
     psi = Crank_Nicholson_Step(psi, A_inv, B)
+
+fig3 = plt.figure(figsize=(10, 6))
+ax3 = fig3.add_subplot(1, 1, 1)
+ax3.plot(time_array / T0, np.abs(c_0), label='|c_0(t)|')
+ax3.plot(time_array / T0, np.real(c_0), label='Re(c_0(t))')
+ax3.plot(time_array / T0, np.imag(c_0), label='Im(c_0(t))')
+ax3.set_xlabel('t / T0')
+ax3.set_ylabel('Coefficient Value')
+plt.legend()
+plt.show()
