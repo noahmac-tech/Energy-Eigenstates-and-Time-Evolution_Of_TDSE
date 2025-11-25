@@ -42,7 +42,29 @@ def Bound_energies(energies):
 def Bound_wavefuncs(wavefuncs, energies):
     
     bound = np.where(energies < 0)[0]
-    return wavefuncs[:, bound]
+    return wavefuncs[:, bound] 
 
-  
-    
+def Normalising_wavefunction(bound_wavefunctions, n, dx):
+
+    u = bound_wavefunctions[:, n]
+    u_norm = u / np.sqrt(np.trapezoid(np.abs(u)**2, dx))
+    return u_norm
+
+def Selecting_energy(bound_energies, n):
+
+    epsilon_n = bound_energies[n]
+    return epsilon_n
+
+def Crank_Nicholson_Matrices(N,dt,H):
+
+    I = np.identity(N)
+    A = I + 0.5j *dt * H
+    B = I - 0.5j *dt * H
+
+    A_inv = np.linalg.inv(A)
+    return A_inv, B
+
+def Crank_Nicholson_Step(psi_t, A_inv, B):
+
+    psi_t_dt = A_inv @ (B @ psi_t)
+    return psi_t_dt
