@@ -79,9 +79,9 @@ def Time_Evolving_Potential(xi, p, t, eta, omega):
     V_t = - (1 + eta * np.sin(omega * t)) / (np.cosh(q_parameter(p) * xi) ** 2)
     return V_t
 
-def Time_Evolving_Hamiltonian(N,L,p,dx,xi,t, eta):
+def Time_Evolving_Hamiltonian(N, p, dx, xi, t, eta, omega):
 
-    V_t = Time_Evolving_Potential(xi, p, t, eta)
+    V_t = Time_Evolving_Potential(xi, p, t, eta, omega)
     main_diag = 2 / dx**2 + V_t
     off_diag = -1 / dx**2 * np.ones(N-1)
 
