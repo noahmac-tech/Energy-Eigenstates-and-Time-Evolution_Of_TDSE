@@ -1,8 +1,7 @@
 import numpy as np
 from numpy.linalg import eigh
 from scipy import constants
-from Grid import xi, dx
-
+ 
 def q_parameter(p):
     return 1 / np.sqrt(p)
 
@@ -22,7 +21,7 @@ def localized_analytical_energies(p,n):
             energies_analytical.append(E_n)
     return energies_analytical
 
-def stationary_hamiltonian(N,L,p):
+def stationary_hamiltonian(N,L,p,dx,xi):
 
     main_diag = 2 / dx**2 + potential_energy(xi,q_parameter(p))
     off_diag = -1 / dx**2 * np.ones(N-1)
