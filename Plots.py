@@ -74,7 +74,6 @@ ax1.set_ylabel('u($\u03BE$)')
 ax1.legend()
 plt.show()
 
-
 # Question 3 
 
 xi, dx = Grid(L=100, N=1000)
