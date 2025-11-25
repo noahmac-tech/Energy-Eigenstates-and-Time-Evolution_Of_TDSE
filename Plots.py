@@ -193,10 +193,6 @@ psi_0 = u_0_norm.copy()
 psi_1 = u_1_norm.copy()
 psi_2 = u_2_norm.copy()
 
-
-
-
-
 for eta in [0.1, 0.5, 1.0]:
     omega = Modulation_Frequency(epsilon_0, epsilon_2)
     T0 = 2 * np.pi / omega
