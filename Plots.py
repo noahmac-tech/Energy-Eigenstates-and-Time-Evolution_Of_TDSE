@@ -77,6 +77,7 @@ plt.show()
 # Question 3 
 
 xi, dx = Grid(L=100, N=1000)
+
 H = stationary_hamiltonian(N=1000, L=100, p=30, dx=dx, xi=xi)
 energies, wavefunctions = eigenvalues_and_vectors(H)
 bound_energies = Bound_energies(energies)
@@ -110,3 +111,59 @@ ax3.set_xlabel('t / T0')
 ax3.set_ylabel('Coefficient Value')
 plt.legend()
 plt.show()
+
+# Question 4
+
+xi, dx = Grid(L=100, N=1000)
+
+H = stationary_hamiltonian(N=1000, L=100, p=30, dx=dx, xi=xi)
+energies, wavefunctions = eigenvalues_and_vectors(H)
+bound_energies = Bound_energies(energies)
+bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)  
+
+u_0_norm = Normalising_wavefunction(bound_wavefunctions, 0, dx)
+u_1_norm = Normalising_wavefunction(bound_wavefunctions, 1, dx)
+u_2_norm = Normalising_wavefunction(bound_wavefunctions, 2, dx)
+
+epsilon_0 = Selecting_energy(bound_energies, 0)
+epsilon_2 = Selecting_energy(bound_energies, 2)
+
+psi_0 = u_0_norm.copy()
+psi_1 = u_1_norm.copy()
+psi_2 = u_2_norm.copy()
+
+time_array = np.zeros(num_steps+1)
+
+c_0 = np.zeros(num_steps+1, dtype=complex)
+c_1 = np.zeros(num_steps+1, dtype=complex)
+c_2 = np.zeros(num_steps+1, dtype=complex)
+
+for eta in [0.1, 0.5, 1.0]:
+    omega = Modulation_Frequency(epsilon_0, epsilon_2)
+    T0 = 2 * np.pi / omega
+    t_max = 8 * np.pi / omega
+    dt = 0.01 * T0
+    num_steps = int(t_max / dt)
+
+    V_n = Time_Evolving_Potential(xi, p=30, t=0, eta=eta, omega=omega)
+    t = 0.0
+
+    for n in range(num_steps+1):
+        time_array[n] = t
+
+        c_0[n] = np.sum(psi_0 * u_0_norm) * dx
+        c_1[n] = np.sum(psi_1 * u_1_norm) * dx
+        c_2[n] = np.sum(psi_2 * u_2_norm) * dx
+
+        V_n_1 = Time_Evolving_Potential(xi, p=30, t=t+dt, eta=eta, omega=omega)
+        V_mid = 0.5 * (V_n + V_n_1)
+
+        H_t = Time_Evolving_Hamiltonian(N=1000, L=100, p=30, dx=dx, xi=xi, t=t, eta=eta)
+        A_inv, B = Crank_Nicholson_Matrices(N=1000, dt=dt, H=H_t)
+
+        psi_0 = Crank_Nicholson_Step(psi_0, A_inv, B)
+        psi_1 = Crank_Nicholson_Step(psi_1, A_inv, B)
+        psi_2 = Crank_Nicholson_Step(psi_2, A_inv, B)
+
+        t += dt
+        V_n = V_n_1
