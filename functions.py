@@ -9,7 +9,7 @@ def potential_energy(x,q):
     return - 1 / (np.cosh(q * x) ** 2)
 
 def number_of_localized_states(p):
-    s = 0.5 * (np.sqrt(1 + 4 / q_parameter(p)**2) - 1)
+    s = 0.5 * (np.sqrt(1 + 4 * p) - 1)
     return int(s)
 
 def localized_analytical_energies(p,n):
@@ -68,3 +68,22 @@ def Crank_Nicholson_Step(psi_t, A_inv, B):
 
     psi_t_dt = A_inv @ (B @ psi_t)
     return psi_t_dt
+
+def Modulation_Frequency(epsilon_0, epsilon_2):
+
+    omega = np.abs(epsilon_2 - epsilon_0)
+    return omega
+
+def Time_Evolving_Potential(xi, p, t, eta, omega):
+    
+    V_t = - (1 + eta * np.sin(omega * t)) / (np.cosh(q_parameter(p) * xi) ** 2)
+    return V_t
+
+def Time_Evolving_Hamiltonian(N,L,p,dx,xi,t, eta):
+
+    V_t = Time_Evolving_Potential(xi, p, t, eta)
+    main_diag = 2 / dx**2 + V_t
+    off_diag = -1 / dx**2 * np.ones(N-1)
+
+    H_t = np.diag(main_diag) + np.diag(off_diag, 1) + np.diag(off_diag, -1)
+    return H_t
