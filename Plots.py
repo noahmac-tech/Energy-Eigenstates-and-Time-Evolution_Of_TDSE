@@ -13,10 +13,11 @@ bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
 fig1 = plt.figure(figsize=(10, 6))
 ax1 = fig1.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
-    psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  # Normalizing the wavefunction
+    psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
     ax1.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
 ax1.set_xlabel('$\u03BE$')
 ax1.set_ylabel('u($\u03BE$)')
+ax1.set_title('N = 100, L = 10, P = 30')
 ax1.legend()
 plt.show()
 
@@ -31,10 +32,11 @@ bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
 fig2 = plt.figure(figsize=(10, 6))
 ax2 = fig2.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
-    psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  # Normalizing the wavefunction
+    psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
     ax2.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
 ax2.set_xlabel('$\u03BE$')
 ax2.set_ylabel('u($\u03BE$)')
+ax2.set_title('N = 100, L = 50, P = 30')
 ax2.legend()
 plt.show()
 
@@ -46,14 +48,15 @@ energies, wavefunctions = eigenvalues_and_vectors(H)
 bound_energies = Bound_energies(energies)
 bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
 
-fig1 = plt.figure(figsize=(10, 6))
-ax1 = fig1.add_subplot(1, 1, 1)
+fig3 = plt.figure(figsize=(10, 6))
+ax3 = fig3.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
-    psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  # Normalizing the wavefunction
-    ax1.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
-ax1.set_xlabel('$\u03BE$')
-ax1.set_ylabel('u($\u03BE$)')
-ax1.legend()
+    psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
+    ax3.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
+ax3.set_xlabel('$\u03BE$')
+ax3.set_ylabel('u($\u03BE$)')
+ax3.set_title('N = 100, L = 100, P = 30')
+ax3.legend()
 plt.show()
 
 # Plot 4: N = 100, L = 150, P = 30
@@ -64,14 +67,72 @@ energies, wavefunctions = eigenvalues_and_vectors(H)
 bound_energies = Bound_energies(energies)
 bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
 
-fig1 = plt.figure(figsize=(10, 6))
-ax1 = fig1.add_subplot(1, 1, 1)
+fig4 = plt.figure(figsize=(10, 6))
+ax4 = fig4.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
-    psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  # Normalizing the wavefunction
-    ax1.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
-ax1.set_xlabel('$\u03BE$')
-ax1.set_ylabel('u($\u03BE$)')
-ax1.legend()
+    psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
+    ax4.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
+ax4.set_xlabel('$\u03BE$')
+ax4.set_ylabel('u($\u03BE$)')
+ax4.set_title('N = 100, L = 150, P = 30')
+ax4.legend()
+plt.show()
+
+# Plot 5: N = 100, L = 100, P = 30
+
+xi, dx = Grid(L=100, N=100)
+H = stationary_hamiltonian(N=100, L=100, p=30, dx=dx, xi=xi)
+energies, wavefunctions = eigenvalues_and_vectors(H)
+bound_energies = Bound_energies(energies)
+bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
+
+fig5 = plt.figure(figsize=(10, 6))
+ax5 = fig5.add_subplot(1, 1, 1)
+for i, psi in enumerate(bound_wavefunctions.T):
+    psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
+    ax5.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
+ax5.set_xlabel('$\u03BE$')
+ax5.set_ylabel('u($\u03BE$)')
+ax5.set_title('N = 100, L = 100, P = 30')
+ax5.legend()
+plt.show()
+
+# Plot 6: N = 500, L = 100, P = 30
+
+xi, dx = Grid(L=100, N=500)
+H = stationary_hamiltonian(N=500, L=100, p=30, dx=dx, xi=xi)
+energies, wavefunctions = eigenvalues_and_vectors(H)
+bound_energies = Bound_energies(energies)
+bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
+
+fig6 = plt.figure(figsize=(10, 6))
+ax6 = fig6.add_subplot(1, 1, 1)
+for i, psi in enumerate(bound_wavefunctions.T):
+    psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
+    ax6.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
+ax6.set_xlabel('$\u03BE$')
+ax6.set_ylabel('u($\u03BE$)')
+ax6.set_title('N = 500, L = 100, P = 30')
+ax6.legend()
+plt.show()
+
+# Plot 7: N = 1000, L = 100, P = 30
+
+xi, dx = Grid(L=100, N=1000)
+H = stationary_hamiltonian(N=1000, L=100, p=30, dx=dx, xi=xi)
+energies, wavefunctions = eigenvalues_and_vectors(H)
+bound_energies = Bound_energies(energies)
+bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
+
+fig7 = plt.figure(figsize=(10, 6))
+ax7 = fig7.add_subplot(1, 1, 1)
+for i, psi in enumerate(bound_wavefunctions.T):
+    psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
+    ax7.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
+ax7.set_xlabel('$\u03BE$')
+ax7.set_ylabel('u($\u03BE$)')
+ax7.set_title('N = 1000, L = 100, P = 30')
+ax7.legend()
 plt.show()
 
 # Question 3 
@@ -92,24 +153,24 @@ num_steps = int(t_max / dt)
 T0 = 2 * np.pi / np.abs(epsilon_0)
 
 c_0 = np.zeros(num_steps, dtype=complex)
-time_array = np.zeros(num_steps)
+time_array_1 = np.zeros(num_steps)
 psi = u_0_norm.copy()
 
 for n in range(num_steps):
     
     c_0[n] = np.sum(psi * u_0_norm) * dx
-    time_array[n] = n * dt
+    time_array_1[n] = n * dt
     A_inv, B = Crank_Nicholson_Matrices(N=1000, dt=dt, H=H)
     psi = Crank_Nicholson_Step(psi, A_inv, B)
 
-fig3 = plt.figure(figsize=(10, 6))
-ax3 = fig3.add_subplot(1, 1, 1)
-ax3.plot(time_array / T0, np.abs(c_0), label='|c_0(t)|')
-ax3.plot(time_array / T0, np.real(c_0), label='Re(c_0(t))')
-ax3.plot(time_array / T0, np.imag(c_0), label='Im(c_0(t))')
-ax3.set_xlabel('t / T0')
-ax3.set_ylabel('Coefficient Value')
-plt.legend()
+fig8 = plt.figure(figsize=(10, 6))
+ax8 = fig8.add_subplot(1, 1, 1)
+ax8.plot(time_array_1 / T0, np.abs(c_0), label='|c_0(t)|')
+ax8.plot(time_array_1 / T0, np.real(c_0), label='Re(c_0(t))')
+ax8.plot(time_array_1 / T0, np.imag(c_0), label='Im(c_0(t))')
+ax8.set_xlabel('t / T0')
+ax8.set_ylabel('Coefficient Value')
+ax8.legend()
 plt.show()
 
 # Question 4
@@ -132,11 +193,9 @@ psi_0 = u_0_norm.copy()
 psi_1 = u_1_norm.copy()
 psi_2 = u_2_norm.copy()
 
-time_array = np.zeros(num_steps+1)
 
-c_0 = np.zeros(num_steps+1, dtype=complex)
-c_1 = np.zeros(num_steps+1, dtype=complex)
-c_2 = np.zeros(num_steps+1, dtype=complex)
+
+
 
 for eta in [0.1, 0.5, 1.0]:
     omega = Modulation_Frequency(epsilon_0, epsilon_2)
@@ -144,12 +203,18 @@ for eta in [0.1, 0.5, 1.0]:
     t_max = 8 * np.pi / omega
     dt = 0.01 * T0
     num_steps = int(t_max / dt)
+    
+    time_array_2 = np.zeros(num_steps+1)
+
+    c_0 = np.zeros(num_steps+1, dtype=complex)
+    c_1 = np.zeros(num_steps+1, dtype=complex)
+    c_2 = np.zeros(num_steps+1, dtype=complex) 
 
     V_n = Time_Evolving_Potential(xi, p=30, t=0, eta=eta, omega=omega)
     t = 0.0
 
     for n in range(num_steps+1):
-        time_array[n] = t
+        time_array_2[n] = t
 
         c_0[n] = np.sum(psi_0 * u_0_norm) * dx
         c_1[n] = np.sum(psi_1 * u_1_norm) * dx
@@ -158,7 +223,7 @@ for eta in [0.1, 0.5, 1.0]:
         V_n_1 = Time_Evolving_Potential(xi, p=30, t=t+dt, eta=eta, omega=omega)
         V_mid = 0.5 * (V_n + V_n_1)
 
-        H_t = Time_Evolving_Hamiltonian(N=1000, L=100, p=30, dx=dx, xi=xi, t=t, eta=eta)
+        H_t = Time_Evolving_Hamiltonian(N=1000, p=30, dx=dx, xi=xi, t=t, eta=eta, omega=omega)
         A_inv, B = Crank_Nicholson_Matrices(N=1000, dt=dt, H=H_t)
 
         psi_0 = Crank_Nicholson_Step(psi_0, A_inv, B)
@@ -167,3 +232,4 @@ for eta in [0.1, 0.5, 1.0]:
 
         t += dt
         V_n = V_n_1
+    
