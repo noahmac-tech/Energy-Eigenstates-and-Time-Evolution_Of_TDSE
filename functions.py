@@ -1,7 +1,7 @@
 import numpy as np
 from numpy.linalg import eigh
 from scipy import constants
-from grid import xi, dx
+from Grid import xi, dx
 
 def q_parameter(p):
     return 1 / np.sqrt(p)
