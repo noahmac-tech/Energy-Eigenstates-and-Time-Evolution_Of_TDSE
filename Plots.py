@@ -229,3 +229,15 @@ for eta in [0.1, 0.5, 1.0]:
         t += dt
         V_n = V_n_1
     
+    Modulation_time = (time_array_2 * omega) / (2 * np.pi)
+
+    fig9 = plt.figure(figsize=(10, 6))
+    ax9 = fig9.add_subplot(1, 1, 1)
+    ax9.plot(Modulation_time, np.abs(c_0), label='|c_0(t)|')
+    ax9.plot(Modulation_time, np.abs(c_1), label='|c_1(t)|')
+    ax9.plot(Modulation_time, np.abs(c_2), label='|c_2(t)|')
+    ax9.set_xlabel('t / T0')
+    ax9.set_ylabel('Coefficient Value')
+    ax9.set_title(f'Modulation with η = {eta}')
+    ax9.legend()
+    plt.show()
