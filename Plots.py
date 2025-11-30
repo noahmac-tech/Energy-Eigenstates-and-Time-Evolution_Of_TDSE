@@ -20,6 +20,7 @@ ax1.set_ylabel('u($\u03BE$)')
 ax1.set_title('N = 100, L = 10, P = 30')
 ax1.legend()
 plt.show()
+plt.savefig('Plot1_N100_L10_P30.png')
 
 # Plot 2: N = 100, L = 50, P = 30
 
@@ -39,6 +40,7 @@ ax2.set_ylabel('u($\u03BE$)')
 ax2.set_title('N = 100, L = 50, P = 30')
 ax2.legend()
 plt.show()
+plt.savefig('Plot2_N100_L50_P30.png')
 
 # Plot 3: N = 100, L = 100, P = 30
 
@@ -58,6 +60,7 @@ ax3.set_ylabel('u($\u03BE$)')
 ax3.set_title('N = 100, L = 100, P = 30')
 ax3.legend()
 plt.show()
+plt.savefig('Plot3_N100_L100_P30.png')
 
 # Plot 4: N = 100, L = 150, P = 30
 
@@ -77,6 +80,7 @@ ax4.set_ylabel('u($\u03BE$)')
 ax4.set_title('N = 100, L = 150, P = 30')
 ax4.legend()
 plt.show()
+plt.savefig('Plot4_N100_L150_P30.png')
 
 # Plot 5: N = 100, L = 100, P = 30
 
@@ -96,6 +100,7 @@ ax5.set_ylabel('u($\u03BE$)')
 ax5.set_title('N = 100, L = 100, P = 30')
 ax5.legend()
 plt.show()
+plt.savefig('Plot5_N100_L100_P30.png')
 
 # Plot 6: N = 500, L = 100, P = 30
 
@@ -115,6 +120,7 @@ ax6.set_ylabel('u($\u03BE$)')
 ax6.set_title('N = 500, L = 100, P = 30')
 ax6.legend()
 plt.show()
+plt.savefig('Plot6_N500_L100_P30.png')
 
 # Plot 7: N = 1000, L = 100, P = 30
 
@@ -134,6 +140,22 @@ ax7.set_ylabel('u($\u03BE$)')
 ax7.set_title('N = 1000, L = 100, P = 30')
 ax7.legend()
 plt.show()
+plt.savefig('Plot7_N1000_L100_P30.png')
+
+# Comparing analytical and numerical energies
+fig8 = plt.figure(figsize=(10, 6))
+ax8 = fig8.add_subplot(1, 1, 1)
+for n in range(len(bound_energies)):
+    E_analytical = localized_analytical_energies(p=30, n=n)
+    ax8.plot(n, bound_energies[n], 'bo')
+    ax8.plot(n, E_analytical[n], 'rx')
+ax8.set_xlabel('n')
+ax8.set_ylabel('Energy')   
+ax8.legend(['Numerical', 'Analytical'])
+plt.show()
+plt.savefig('Plot8_Analytical_vs_Numerical_Energies.png')
+
+
 
 # Question 3 
 
@@ -163,14 +185,14 @@ for n in range(num_steps):
     A_inv, B = Crank_Nicholson_Matrices(N=1000, dt=dt, H=H)
     psi = Crank_Nicholson_Step(psi, A_inv, B)
 
-fig8 = plt.figure(figsize=(10, 6))
-ax8 = fig8.add_subplot(1, 1, 1)
-ax8.plot(time_array_1 / T0, np.abs(c_0), label='|c_0(t)|')
-ax8.plot(time_array_1 / T0, np.real(c_0), label='Re(c_0(t))')
-ax8.plot(time_array_1 / T0, np.imag(c_0), label='Im(c_0(t))')
-ax8.set_xlabel('t / T0')
-ax8.set_ylabel('Coefficient Value')
-ax8.legend()
+fig9 = plt.figure(figsize=(10, 6))
+ax9 = fig9.add_subplot(1, 1, 1)
+ax9.plot(time_array_1 / T0, np.abs(c_0), label='|c_0(t)|')
+ax9.plot(time_array_1 / T0, np.real(c_0), label='Re(c_0(t))')
+ax9.plot(time_array_1 / T0, np.imag(c_0), label='Im(c_0(t))')
+ax9.set_xlabel('t / T0')
+ax9.set_ylabel('Coefficient Value')
+ax9.legend()
 plt.show()
 
 # Question 4
@@ -231,13 +253,13 @@ for eta in [0.1, 0.5, 1.0]:
     
     Modulation_time = (time_array_2 * omega) / (2 * np.pi)
 
-    fig9 = plt.figure(figsize=(10, 6))
-    ax9 = fig9.add_subplot(1, 1, 1)
-    ax9.plot(Modulation_time, np.abs(c_0), label='|c_0(t)|')
-    ax9.plot(Modulation_time, np.abs(c_1), label='|c_1(t)|')
-    ax9.plot(Modulation_time, np.abs(c_2), label='|c_2(t)|')
-    ax9.set_xlabel('t / T0')
-    ax9.set_ylabel('Coefficient Value')
-    ax9.set_title(f'Modulation with η = {eta}')
-    ax9.legend()
+    fig10 = plt.figure(figsize=(10, 6))
+    ax10 = fig10.add_subplot(1, 1, 1)
+    ax10.plot(Modulation_time, np.abs(c_0), label='|c_0(t)|')
+    ax10.plot(Modulation_time, np.abs(c_1), label='|c_1(t)|')
+    ax10.plot(Modulation_time, np.abs(c_2), label='|c_2(t)|')
+    ax10.set_xlabel('t / T0')
+    ax10.set_ylabel('Coefficient Value')
+    ax10.set_title(f'Modulation with η = {eta}')
+    ax10.legend()
     plt.show()
