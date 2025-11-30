@@ -143,6 +143,7 @@ plt.show()
 plt.savefig('Plot7_N1000_L100_P30.png')
 
 # Comparing analytical and numerical energies
+
 fig8 = plt.figure(figsize=(10, 6))
 ax8 = fig8.add_subplot(1, 1, 1)
 for n in range(len(bound_energies)):
