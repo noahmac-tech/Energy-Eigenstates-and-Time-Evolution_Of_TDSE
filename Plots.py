@@ -2,6 +2,8 @@ from Functions import *
 from Grid import *
 import matplotlib.pyplot as plt
 
+plt.rcParams.update({'font.size': 16})
+
 # Plot 1: N = 100, L = 10, P = 30
 
 xi, dx = Grid(L=10, N=100)
@@ -19,8 +21,9 @@ ax1.set_xlabel('$\u03BE$')
 ax1.set_ylabel('u($\u03BE$)')
 ax1.set_title('N = 100, L = 10, P = 30')
 ax1.legend()
-plt.show()
 plt.savefig('Plot1_N100_L10_P30.png')
+plt.show()
+
 
 # Plot 2: N = 100, L = 50, P = 30
 
@@ -39,8 +42,9 @@ ax2.set_xlabel('$\u03BE$')
 ax2.set_ylabel('u($\u03BE$)')
 ax2.set_title('N = 100, L = 50, P = 30')
 ax2.legend()
-plt.show()
 plt.savefig('Plot2_N100_L50_P30.png')
+plt.show()
+
 
 # Plot 3: N = 100, L = 100, P = 30
 
@@ -59,8 +63,9 @@ ax3.set_xlabel('$\u03BE$')
 ax3.set_ylabel('u($\u03BE$)')
 ax3.set_title('N = 100, L = 100, P = 30')
 ax3.legend()
-plt.show()
 plt.savefig('Plot3_N100_L100_P30.png')
+plt.show()
+
 
 # Plot 4: N = 100, L = 150, P = 30
 
@@ -79,8 +84,9 @@ ax4.set_xlabel('$\u03BE$')
 ax4.set_ylabel('u($\u03BE$)')
 ax4.set_title('N = 100, L = 150, P = 30')
 ax4.legend()
-plt.show()
 plt.savefig('Plot4_N100_L150_P30.png')
+plt.show()
+
 
 # Plot 5: N = 100, L = 100, P = 30
 
@@ -99,8 +105,9 @@ ax5.set_xlabel('$\u03BE$')
 ax5.set_ylabel('u($\u03BE$)')
 ax5.set_title('N = 100, L = 100, P = 30')
 ax5.legend()
-plt.show()
 plt.savefig('Plot5_N100_L100_P30.png')
+plt.show()
+
 
 # Plot 6: N = 500, L = 100, P = 30
 
@@ -119,8 +126,9 @@ ax6.set_xlabel('$\u03BE$')
 ax6.set_ylabel('u($\u03BE$)')
 ax6.set_title('N = 500, L = 100, P = 30')
 ax6.legend()
-plt.show()
 plt.savefig('Plot6_N500_L100_P30.png')
+plt.show()
+
 
 # Plot 7: N = 1000, L = 100, P = 30
 
@@ -139,22 +147,26 @@ ax7.set_xlabel('$\u03BE$')
 ax7.set_ylabel('u($\u03BE$)')
 ax7.set_title('N = 1000, L = 100, P = 30')
 ax7.legend()
-plt.show()
 plt.savefig('Plot7_N1000_L100_P30.png')
+plt.show()
+
 
 # Comparing analytical and numerical energies
 
-fig8 = plt.figure(figsize=(10, 6))
+fig8 = plt.figure(figsize=(10, 8))
 ax8 = fig8.add_subplot(1, 1, 1)
 for n in range(len(bound_energies)):
     E_analytical = localized_analytical_energies(p=30, n=n)
+    print(E_analytical[n])
+    print(bound_energies[n])
     ax8.plot(n, bound_energies[n], 'bo')
     ax8.plot(n, E_analytical[n], 'rx')
 ax8.set_xlabel('n')
 ax8.set_ylabel('Energy')   
 ax8.legend(['Numerical', 'Analytical'])
-plt.show()
 plt.savefig('Plot8_Analytical_vs_Numerical_Energies.png')
+plt.show()
+
 
 
 
