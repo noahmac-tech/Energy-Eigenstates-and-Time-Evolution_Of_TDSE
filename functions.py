@@ -76,7 +76,7 @@ def Modulation_Frequency(epsilon_0, epsilon_2):
 
 def Time_Evolving_Potential(xi, p, t, eta, omega):
     
-    V_t = - (1 + eta * np.sin(omega * t)) / (np.cosh(q_parameter(p) * xi) ** 2)
+    V_t = - (1 + (eta * np.sin(omega * t))) / (np.cosh(q_parameter(p) * xi) ** 2)
     return V_t
 
 def Time_Evolving_Hamiltonian(N, p, dx, xi, t, eta, omega):

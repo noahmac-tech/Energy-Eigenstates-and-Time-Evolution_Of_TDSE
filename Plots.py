@@ -2,7 +2,8 @@ from Functions import *
 from Grid import *
 import matplotlib.pyplot as plt
 
-plt.rcParams.update({'font.size': 16})
+plt.rcParams.update({'font.size': 20})
+plt.rc('legend', fontsize=14)
 
 # Plot 1: N = 100, L = 10, P = 30
 
@@ -16,7 +17,7 @@ fig1 = plt.figure(figsize=(10, 6))
 ax1 = fig1.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
-    ax1.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
+    ax1.plot(xi, psi_norm, label=f'n={i}, $\u03B5$={bound_energies[i]:.3f}')
 ax1.set_xlabel('$\u03BE$')
 ax1.set_ylabel('u($\u03BE$)')
 ax1.set_title('N = 100, L = 10, P = 30')
@@ -37,7 +38,7 @@ fig2 = plt.figure(figsize=(10, 6))
 ax2 = fig2.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
-    ax2.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
+    ax2.plot(xi, psi_norm, label=f'n={i}, $\u03B5$={bound_energies[i]:.3f}')
 ax2.set_xlabel('$\u03BE$')
 ax2.set_ylabel('u($\u03BE$)')
 ax2.set_title('N = 100, L = 50, P = 30')
@@ -58,7 +59,7 @@ fig3 = plt.figure(figsize=(10, 6))
 ax3 = fig3.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
-    ax3.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
+    ax3.plot(xi, psi_norm, label=f'n={i}, $\u03B5$={bound_energies[i]:.3f}')
 ax3.set_xlabel('$\u03BE$')
 ax3.set_ylabel('u($\u03BE$)')
 ax3.set_title('N = 100, L = 100, P = 30')
@@ -79,7 +80,7 @@ fig4 = plt.figure(figsize=(10, 6))
 ax4 = fig4.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
-    ax4.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
+    ax4.plot(xi, psi_norm, label=f'n={i}, $\u03B5$={bound_energies[i]:.3f}')
 ax4.set_xlabel('$\u03BE$')
 ax4.set_ylabel('u($\u03BE$)')
 ax4.set_title('N = 100, L = 150, P = 30')
@@ -100,7 +101,7 @@ fig5 = plt.figure(figsize=(10, 6))
 ax5 = fig5.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
-    ax5.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
+    ax5.plot(xi, psi_norm, label=f'n={i}, $\u03B5$={bound_energies[i]:.3f}')
 ax5.set_xlabel('$\u03BE$')
 ax5.set_ylabel('u($\u03BE$)')
 ax5.set_title('N = 100, L = 100, P = 30')
@@ -121,7 +122,7 @@ fig6 = plt.figure(figsize=(10, 6))
 ax6 = fig6.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
-    ax6.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
+    ax6.plot(xi, psi_norm, label=f'n={i}, $\u03B5$={bound_energies[i]:.3f}')
 ax6.set_xlabel('$\u03BE$')
 ax6.set_ylabel('u($\u03BE$)')
 ax6.set_title('N = 500, L = 100, P = 30')
@@ -142,7 +143,8 @@ fig7 = plt.figure(figsize=(10, 6))
 ax7 = fig7.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
-    ax7.plot(xi, psi_norm, label=f'n={i}, E={bound_energies[i]:.3f}')
+    ax7.plot(xi, psi_norm, label=f'n={i}, $\u03B5$={bound_energies[i]:.3f}')
+ax7.plot(xi, potential_energy(xi, q_parameter(30)), 'k--', label='Potential Energy')
 ax7.set_xlabel('$\u03BE$')
 ax7.set_ylabel('u($\u03BE$)')
 ax7.set_title('N = 1000, L = 100, P = 30')
@@ -166,6 +168,7 @@ ax8.set_ylabel('Energy')
 ax8.legend(['Numerical', 'Analytical'])
 plt.savefig('Plot8_Analytical_vs_Numerical_Energies.png')
 plt.show()
+
 
 
 
