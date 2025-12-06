@@ -173,7 +173,7 @@ plt.show()
 
 
 
-# Question 3 
+# Question 3 - Time Evolution of Coefficient c_0
 
 xi, dx = Grid(L=100, N=1000)
 
@@ -211,7 +211,7 @@ ax9.set_ylabel('Coefficient Value')
 ax9.legend()
 plt.show()
 
-# Question 4
+# Question 4 - Time Evolution with Modulated Potential
 
 xi, dx = Grid(L=100, N=1000)
 
