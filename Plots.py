@@ -13,7 +13,7 @@ energies, wavefunctions = eigenvalues_and_vectors(H)
 bound_energies = Bound_energies(energies)
 bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
 
-fig1 = plt.figure(figsize=(10, 6))
+fig1 = plt.figure(figsize=(10, 8))
 ax1 = fig1.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
@@ -34,7 +34,7 @@ energies, wavefunctions = eigenvalues_and_vectors(H)
 bound_energies = Bound_energies(energies)
 bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
 
-fig2 = plt.figure(figsize=(10, 6))
+fig2 = plt.figure(figsize=(10, 8))
 ax2 = fig2.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
@@ -55,7 +55,7 @@ energies, wavefunctions = eigenvalues_and_vectors(H)
 bound_energies = Bound_energies(energies)
 bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
 
-fig3 = plt.figure(figsize=(10, 6))
+fig3 = plt.figure(figsize=(10, 8))
 ax3 = fig3.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
@@ -76,7 +76,7 @@ energies, wavefunctions = eigenvalues_and_vectors(H)
 bound_energies = Bound_energies(energies)
 bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
 
-fig4 = plt.figure(figsize=(10, 6))
+fig4 = plt.figure(figsize=(10, 8))
 ax4 = fig4.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
@@ -97,7 +97,7 @@ energies, wavefunctions = eigenvalues_and_vectors(H)
 bound_energies = Bound_energies(energies)
 bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
 
-fig5 = plt.figure(figsize=(10, 6))
+fig5 = plt.figure(figsize=(10, 8))
 ax5 = fig5.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
@@ -118,7 +118,7 @@ energies, wavefunctions = eigenvalues_and_vectors(H)
 bound_energies = Bound_energies(energies)
 bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
 
-fig6 = plt.figure(figsize=(10, 6))
+fig6 = plt.figure(figsize=(10, 8))
 ax6 = fig6.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
@@ -139,12 +139,12 @@ energies, wavefunctions = eigenvalues_and_vectors(H)
 bound_energies = Bound_energies(energies)
 bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
 
-fig7 = plt.figure(figsize=(10, 6))
+fig7 = plt.figure(figsize=(10, 8))
 ax7 = fig7.add_subplot(1, 1, 1)
 for i, psi in enumerate(bound_wavefunctions.T):
     psi_norm = psi / np.sqrt(np.trapezoid((np.abs(psi)**2), xi))  
     ax7.plot(xi, psi_norm, label=f'n={i}, $\u03B5$={bound_energies[i]:.3f}')
-ax7.plot(xi, potential_energy(xi, q_parameter(30)), 'k--', label='Potential Energy')
+#ax7.plot(xi, potential_energy(xi, q_parameter(30)), 'k--', label='Potential Energy')
 ax7.set_xlabel('$\u03BE$')
 ax7.set_ylabel('u($\u03BE$)')
 ax7.set_title('N = 1000, L = 100, P = 30')
@@ -185,10 +185,11 @@ bound_wavefunctions = Bound_wavefuncs(wavefunctions, energies)
 u_0_norm = Normalising_wavefunction(bound_wavefunctions, 0, dx)
 epsilon_0 = Selecting_energy(bound_energies, 0)
 
+T0 = 2 * np.pi / np.abs(epsilon_0)
 dt = 0.1
 t_max = 8 * np.pi / np.abs(epsilon_0)
 num_steps = int(t_max / dt)
-T0 = 2 * np.pi / np.abs(epsilon_0)
+
 
 c_0 = np.zeros(num_steps, dtype=complex)
 time_array_1 = np.zeros(num_steps)
@@ -196,19 +197,21 @@ psi = u_0_norm.copy()
 
 for n in range(num_steps):
     
-    c_0[n] = np.sum(psi * u_0_norm) * dx
+    c_0[n] = np.sum(np.conj(psi) * u_0_norm) * dx
     time_array_1[n] = n * dt
     A_inv, B = Crank_Nicholson_Matrices(N=1000, dt=dt, H=H)
     psi = Crank_Nicholson_Step(psi, A_inv, B)
 
-fig9 = plt.figure(figsize=(10, 6))
+fig9 = plt.figure(figsize=(10, 8))
 ax9 = fig9.add_subplot(1, 1, 1)
 ax9.plot(time_array_1 / T0, np.abs(c_0), label='|c_0(t)|')
 ax9.plot(time_array_1 / T0, np.real(c_0), label='Re(c_0(t))')
 ax9.plot(time_array_1 / T0, np.imag(c_0), label='Im(c_0(t))')
-ax9.set_xlabel('t / T0')
+ax9.set_xlabel('t / $T_A$')
 ax9.set_ylabel('Coefficient Value')
 ax9.legend()
+ax9.grid(True)
+fig9.savefig('Plot9_Time_Evolution_c0.png')
 plt.show()
 
 # Question 4 - Time Evolution with Modulated Potential
@@ -233,9 +236,9 @@ psi_2 = u_2_norm.copy()
 
 for eta in [0.1, 0.5, 1.0]:
     omega = Modulation_Frequency(epsilon_0, epsilon_2)
-    T0 = 2 * np.pi / omega
+    TM = 2 * np.pi / omega
     t_max = 8 * np.pi / omega
-    dt = 0.01 * T0
+    dt = 0.01 * TM
     num_steps = int(t_max / dt)
     
     time_array_2 = np.zeros(num_steps+1)
@@ -250,9 +253,9 @@ for eta in [0.1, 0.5, 1.0]:
     for n in range(num_steps+1):
         time_array_2[n] = t
 
-        c_0[n] = np.sum(psi_0 * u_0_norm) * dx
-        c_1[n] = np.sum(psi_1 * u_1_norm) * dx
-        c_2[n] = np.sum(psi_2 * u_2_norm) * dx
+        c_0[n] = np.sum(np.conj(psi_0) * u_0_norm) * dx
+        c_1[n] = np.sum(np.conj(psi_1) * u_1_norm) * dx
+        c_2[n] = np.sum(np.conj(psi_2) * u_2_norm) * dx
 
         V_n_1 = Time_Evolving_Potential(xi, p=30, t=t+dt, eta=eta, omega=omega)
         V_mid = 0.5 * (V_n + V_n_1)
@@ -269,13 +272,15 @@ for eta in [0.1, 0.5, 1.0]:
     
     Modulation_time = (time_array_2 * omega) / (2 * np.pi)
 
-    fig10 = plt.figure(figsize=(10, 6))
+    fig10 = plt.figure(figsize=(10, 8))
     ax10 = fig10.add_subplot(1, 1, 1)
     ax10.plot(Modulation_time, np.abs(c_0), label='|c_0(t)|')
     ax10.plot(Modulation_time, np.abs(c_1), label='|c_1(t)|')
     ax10.plot(Modulation_time, np.abs(c_2), label='|c_2(t)|')
-    ax10.set_xlabel('t / T0')
+    ax10.set_xlabel('t / $T_M$')
     ax10.set_ylabel('Coefficient Value')
     ax10.set_title(f'Modulation with η = {eta}')
     ax10.legend()
+    ax10.grid(True)
+    fig10.savefig(f'Plot10_Time_Evolution_Modulated_Potential_eta_{eta}.png')
     plt.show()
